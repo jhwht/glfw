@@ -32,13 +32,36 @@ project "GLFW"
 			"src/win32_window.c",
 			"src/wgl_context.c",
 			"src/egl_context.c",
-			"src/osmesa_context.c"
+			--"src/osmesa_context.c"
 		}
 
 		defines 
 		{ 
 			"_GLFW_WIN32",
 			"_CRT_SECURE_NO_WARNINGS"
+		}
+
+	filter "system:macosx"
+		systemversion "13.0"
+		staticruntime "On"
+
+		architecture "ARM64"
+
+		files
+		{
+			"src/cocoa_init.m",
+			"src/cocoa_joystick.m",
+			"src/cocoa_monitor.m",
+			"src/cocoa_time.c",
+			"src/cocoa_window.m",
+			"src/posix_thread.c",
+			"src/egl_context.c",
+			"src/nsgl_context.m",
+		}
+
+		defines
+		{
+			"_GLFW_COCOA"
 		}
 
 	filter "configurations:Debug"
